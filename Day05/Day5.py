@@ -15,24 +15,23 @@ def part1():
     x2, y2 = x2y2.strip().split(',')
     x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
 
-    if x1 == x2 or y1 == y2:
-      
-      if x1 == x2:
-        minY = min(y1, y2)
-        maxY = max(y1, y2)
-        for i in range(minY, maxY+1):
-          if (x1, i) in coords:
-            coords[(x1, i)] += 1
-          else :
-            coords[(x1, i)] = 1
-      else:
-        minX = min(x1, x2)
-        maxX = max(x1, x2)
-        for i in range(minX, maxX+1):
-          if (i, y1) in coords:
-            coords[(i, y1)] += 1
-          else :
-            coords[(i, y1)] = 1
+    if x1 == x2:
+      minY = min(y1, y2)
+      maxY = max(y1, y2)
+      for i in range(minY, maxY+1):
+        if (x1, i) in coords:
+          coords[(x1, i)] += 1
+        else :
+          coords[(x1, i)] = 1
+          
+    elif y1 == y2:
+      minX = min(x1, x2)
+      maxX = max(x1, x2)
+      for i in range(minX, maxX+1):
+        if (i, y1) in coords:
+          coords[(i, y1)] += 1
+        else :
+          coords[(i, y1)] = 1
       
   print(sum([1 for (x,y) in coords if coords[(x,y)] >= 2]))
 
@@ -46,24 +45,23 @@ def part2():
     x2, y2 = x2y2.strip().split(',')
     x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
 
-    if x1 == x2 or y1 == y2:
-      
-      if x1 == x2:
-        minY = min(y1, y2)
-        maxY = max(y1, y2)
-        for i in range(minY, maxY+1):
-          if (x1, i) in coords:
-            coords[(x1, i)] += 1
-          else :
-            coords[(x1, i)] = 1
-      else:
-        minX = min(x1, x2)
-        maxX = max(x1, x2)
-        for i in range(minX, maxX+1):
-          if (i, y1) in coords:
-            coords[(i, y1)] += 1
-          else :
-            coords[(i, y1)] = 1
+    if x1 == x2:
+      minY = min(y1, y2)
+      maxY = max(y1, y2)
+      for i in range(minY, maxY+1):
+        if (x1, i) in coords:
+          coords[(x1, i)] += 1
+        else :
+          coords[(x1, i)] = 1
+
+    elif y1 == y2:
+      minX = min(x1, x2)
+      maxX = max(x1, x2)
+      for i in range(minX, maxX+1):
+        if (i, y1) in coords:
+          coords[(i, y1)] += 1
+        else :
+          coords[(i, y1)] = 1
     
     #diagonal
     else:
