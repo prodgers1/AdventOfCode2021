@@ -18,24 +18,21 @@ for line in _input:
 
 def part1():
   ans = []
+  #directions, up right down left
+  DR = [-1, 0, 1, 0] #change in row
+  DC = [0, 1, 0, -1] #change in col
   for row in range(len(heatmap)):
     for col in range(len(heatmap[0])):
       toCheck = heatmap[row][col]
       potential = []
-
-      #up
-      if row - 1 >= 0:
-        potential.append(heatmap[row-1][col])
-      #left
-      if col - 1 >= 0:
-        potential.append(heatmap[row][col - 1])
-      #right
-      if col + 1 < len(heatmap[0]):
-        potential.append(heatmap[row][col + 1])
-      #down
-      if row + 1 < len(heatmap):
-        potential.append(heatmap[row+1][col])
       
+      for d in range(4):
+        dr = row + DR[d]
+        dc = col + DC[d]
+
+        if 0 <= dr < len(heatmap) and 0 <= dc < len(heatmap[0]):
+          potential.append(heatmap[dr][dc])
+
       good = True
       for num in potential:
         if toCheck >= num:
@@ -54,6 +51,9 @@ def part2():
   ans = []
   checked = set()
   basins = []
+  #directions, up right down left
+  DR = [-1, 0, 1, 0] #change in row
+  DC = [0, 1, 0, -1] #change in col
   for row in range(len(heatmap)):
     for col in range(len(heatmap[0])):
       current = heatmap[row][col]
@@ -74,18 +74,14 @@ def part2():
           checked.add((row,col))
           basin.append(heatmap[row][col])
           
-          #up
-          if row - 1 >= 0 and heatmap[row-1][col] != 9 and (row - 1, col) not in checked:
-            potential.append((row-1, col))
-          #left
-          if col - 1 >= 0 and heatmap[row][col - 1] != 9 and (row, col - 1) not in checked:
-            potential.append((row, col - 1))
-          #right
-          if col + 1 < len(heatmap[0]) and heatmap[row][col + 1] != 9 and (row, col + 1) not in checked:
-            potential.append((row, col + 1))
-          #down
-          if row + 1 < len(heatmap) and heatmap[row+1][col] != 9 and (row + 1, col) not in checked:
-            potential.append((row + 1, col))
+          #loop over all the directions, up right down left
+          for d in range(4):
+            dr = row + DR[d]
+            dc = col + DC[d]
+
+            if 0 <= dr < len(heatmap) and 0 <= dc < len(heatmap[0]) and heatmap[dr][dc] != 9 and (dr, dc) not in checked:
+              potential.append((dr, dc))
+          
         
         basins.append(basin)
 
