@@ -17,13 +17,21 @@ _input = GetInput(24)
 #start = 93997999296912
 start = 99999999999999
 deduct = 1
-minSoFar = 9999999999999
+minSoFar = (9999999999999, 0)
+zValues = defaultdict(list)
+
 while True:
   variables = defaultdict(int)
   
+
   if '0' in str(start):
     start -= deduct
     continue
+  
+  if str(start)[12] != '1' or str(start)[11] != '9' or str(start)[8] != '2':
+    start -= deduct
+    continue
+
   print(f"Checking: {start}")
 
   currentIndex = 0
@@ -121,15 +129,17 @@ while True:
         variables[a] = 0
   
   #print(variables['z'])
+  
 
-  if variables['z'] < minSoFar:
-    minSoFar = variables['z']
+  if len(str(variables['z'])) < 6:
+    print(start)
 
-  if len(str(variables['z'])) < 4:
-    asddf = 3
+  if variables['z'] < minSoFar[0]:
+    minSoFar = (variables['z'], start)
 
   if variables['y'] == 0 and variables['x'] == 0:
-    print(start)
+    zValues[variables['z']].append(start)
+    #print(start)
 
   if variables['z'] == 0:
     print(f"FOUND! {start}")
